@@ -1,97 +1,97 @@
 # CCSwitch
 
-A command-line tool for automatic switching between multiple model API channels written in Rust.
+基于 Rust 开发的多渠道 AI 模型 API 自动切换命令行工具。
 
-## Features
+## 功能特性
 
-- **Multi-channel support**: Configure multiple API endpoints for the same model
-- **Automatic failover**: Automatically switches to available channels when one fails
-- **Health checking**: Test channel availability before making requests
-- **Easy management**: Add, remove, and list channels with simple commands
-- **Model agnostic**: Works with OpenAI, Claude, and other compatible APIs
+- **多渠道支持**: 为同一模型配置多个 API 端点
+- **自动故障转移**: 当一个渠道失效时自动切换到可用渠道
+- **健康检查**: 在请求前测试渠道可用性
+- **便捷管理**: 通过简单命令添加、删除和列出渠道
+- **模型无关**: 支持 OpenAI、Claude 和其他兼容的 API
 
-## Installation
+## 安装
 
 ```bash
 cargo install ccswitch
 ```
 
-Or clone and build from source:
+或者从源码构建:
 
 ```bash
-git clone https://github.com/yourusername/ccswitch
+git clone https://github.com/hanlife02/ccswitch
 cd ccswitch
 cargo build --release
 ```
 
-## Configuration
+## 配置
 
-CCSwitch stores its configuration in your system's config directory:
+CCSwitch 将配置文件存储在系统配置目录中:
 - Linux: `~/.config/ccswitch/config.json`
 - macOS: `~/Library/Application Support/ccswitch/config.json`
 - Windows: `%APPDATA%\ccswitch\config.json`
 
-## Usage
+## 使用方法
 
-### Add a new channel
+### 添加新渠道
 
 ```bash
-# Add OpenAI channel
+# 添加 OpenAI 渠道
 ccswitch add openai https://api.openai.com/v1/chat/completions -k YOUR_API_KEY -m gpt-3.5-turbo
 
-# Add Anthropic Claude channel
+# 添加 Anthropic Claude 渠道
 ccswitch add claude https://api.anthropic.com/v1/messages -k YOUR_API_KEY -m claude-3-sonnet-20240229
 
-# Add custom endpoint
+# 添加自定义端点
 ccswitch add custom https://your-api.com/v1/chat -k YOUR_API_KEY
 ```
 
-### List all channels
+### 列出所有渠道
 
 ```bash
 ccswitch list
 ```
 
-### Test channel availability
+### 测试渠道可用性
 
 ```bash
-# Test all channels
+# 测试所有渠道
 ccswitch test
 
-# Test specific channel
+# 测试特定渠道
 ccswitch test openai
 ```
 
-### Make a request with automatic switching
+### 发送请求并自动切换
 
 ```bash
-# Simple request
-ccswitch request "Hello, how are you?"
+# 简单请求
+ccswitch request "你好，你好吗？"
 
-# Request with specific model
-ccswitch request "Explain quantum computing" -m gpt-4
+# 指定模型的请求
+ccswitch request "解释一下量子计算" -m gpt-4
 
-# Request with custom parameters
-ccswitch request "Write a story" -m claude-3-sonnet-20240229 --max-tokens 500 -t 0.8
+# 自定义参数的请求
+ccswitch request "写一个故事" -m claude-3-sonnet-20240229 --max-tokens 500 -t 0.8
 ```
 
-### Remove a channel
+### 删除渠道
 
 ```bash
 ccswitch remove openai
 ```
 
-## How it works
+## 工作原理
 
-1. When you make a request, CCSwitch finds all channels that support the requested model
-2. It tests channels in priority order (configurable)
-3. The first available channel is used to make the actual API request
-4. If a channel fails, it automatically tries the next available one
-5. The response includes information about which channel was used
+1. 发送请求时，CCSwitch 查找支持所需模型的所有渠道
+2. 按优先级顺序测试渠道（可配置）
+3. 使用第一个可用渠道进行实际 API 请求
+4. 如果渠道失败，自动尝试下一个可用渠道
+5. 响应中包含使用了哪个渠道的信息
 
-## Configuration Format
+## 配置文件格式
 
-The config file uses JSON format:
+配置文件使用 JSON 格式:
 
 ```json
 {
@@ -111,6 +111,6 @@ The config file uses JSON format:
 }
 ```
 
-## License
+## 许可证
 
 MIT OR Apache-2.0
