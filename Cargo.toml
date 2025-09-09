@@ -1,0 +1,30 @@
+[package]
+name = "ccswitch"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A CLI tool for automatic switching between multiple model API channels"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/hanlife02/ccswitch"
+repository = "https://github.com/hanlife02/ccswitch"
+keywords = ["cli", "api", "model", "switching", "automation"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "ccswitch"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+reqwest = { version = "0.11", features = ["json"] }
+anyhow = "1.0"
+thiserror = "1.0"
+dirs = "5.0"
+uuid = { version = "1.0", features = ["v4"] }
+url = "2.4"
+log = "0.4"
+env_logger = "0.10"
